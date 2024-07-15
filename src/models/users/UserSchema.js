@@ -41,6 +41,11 @@ const UserSchema = new Schema({
     toJSON:{
         transform: UserResource
     },
+    statics:{
+        findByUserEmail(email){
+            return this.findOne({email})
+        }
+    }
 
 });
 
