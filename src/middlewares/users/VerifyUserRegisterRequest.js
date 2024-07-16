@@ -1,4 +1,5 @@
 const ApiResponse = require("../../resources/api_Response_Resources/ApiResponse");
+const { Hash, uniqueUsernameString } = require("../../utils");
 const { UserValidatorSchema } = require("../../validators/ValidatorSchemas");
 
 
@@ -18,8 +19,14 @@ class VerifyUserRegisterRequest{
             if(error)
             {
                 throw new Error(error);
-            }else{
-                return value;
+            }else if(value){
+                const userValueObject={
+                    name:value.name,
+                    email:value.email,
+                    username: await uniqueUsernameString(value.name,value.email),
+                    password: await Hash(password)
+                }
+                return userValueObject;
             }
         }catch(error){
             ApiResponse.ApiResourceErrorResponse(response,400,error);

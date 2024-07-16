@@ -7,6 +7,7 @@ function UserResource(doc,ret){
     delete ret.createdAt;
     delete ret.updatedAt;
     delete ret.__v;
+    delete ret.password;
     return ret;
 }
 

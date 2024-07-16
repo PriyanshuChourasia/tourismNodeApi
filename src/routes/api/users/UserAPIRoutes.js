@@ -4,7 +4,9 @@ const userRouter = express.Router();
 
 
 
-userRouter.post('/register',UserController.register)
+userRouter.post('/register',UserController.register);
+
+userRouter.post('/auth')
 
 
 

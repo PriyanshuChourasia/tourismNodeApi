@@ -6,15 +6,35 @@
 class ApiResponse{
 
 
-    ApiResourceResponse(response,response_status,response_data){
-        return response.status(response_status).json({
-            data: response_data,
-            status: response_status
-        });
+    constructor(){}
+
+
+    SuccessResponse(response,response_Status,response_Data){
+        return response.status(response_Status.code).json({
+            data:response_Data,
+            status:response_Status.code,
+        })
     }
 
+    ErrorResponse(response,response_Status,response_msg){
+        return response.status(response_Status.code).json({
+            error:response_msg,
+            status:response_Status.code,
+        })
+    }
 
     /** -----------------------------Previous Code----------- */
+
+    // ApiResourceResponse(response,response_status,response_data){
+    //     return response.status(response_status).json({
+    //         data: response_data,
+    //         status: response_status
+    //     });
+    // }
+
+
+
+
     // ApiResourceErrorResponse(response,response_status,response_error){
 
     //     let errorResponse = [];

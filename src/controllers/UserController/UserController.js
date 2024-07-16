@@ -3,6 +3,7 @@ const { User } = require('../../models/users/UserSchema');
 const { checkExsistingUser } = require('../../models/users/UserSchemaStatics');
 const ApiResponse = require('../../resources/api_Response_Resources/ApiResponse');
 const { isRequestEmpty } = require('../../utils/api_request_check/api_request_check');
+const { APIResponseCode } = require('../../utils/status_Codes/Response_Status_Codes');
 
 class UserController {
 
@@ -18,14 +19,17 @@ class UserController {
             if (Validatedresponse) {
 
               const userExists = await checkExsistingUser(Validatedresponse.email);
-                
-
-                // const user = User.create({
-                //     name: Validatedresponse.name,
-                //     email:Validatedresponse.email,
-                //     password:Validatedresponse.password
-                // })
-                ApiResponse.ApiResourceResponse(res, 200, Validatedresponse);
+              if(userExists){
+                ApiResponse.ErrorResponse(res,APIResponseCode.Request_Conflict,"User Already Exists");
+              }else if(!userExists){
+                const user = await User.create({
+                    name:Validatedresponse.name,
+                    email:Validatedresponse.email,
+                    password:Validatedresponse.password,
+                    username:Validatedresponse.username
+                });
+                ApiResponse.SuccessResponse(res,APIResponseCode.Success,user);
+              }
             }
         }
     }

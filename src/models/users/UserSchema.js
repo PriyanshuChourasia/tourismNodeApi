@@ -1,7 +1,7 @@
 const {Mongoose}  = require('../../config/database');
 const {UserResource} = require('../../helper/Resources/UserResponseResource/UserResponseResource');
 
-const responseArray = ['_id','__v','createdAt','updatedAt'];
+// const responseArray = ['_id','__v','createdAt','updatedAt'];
 
 
 const {Schema} = Mongoose;
@@ -14,6 +14,10 @@ const UserSchema = new Schema({
     email:{
         type: String,
         required:[true,'Users email is required'],
+        unique:true
+    },
+    username:{
+        type:String,
         unique:true
     },
     password:{
