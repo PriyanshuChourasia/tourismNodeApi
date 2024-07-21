@@ -1,6 +1,6 @@
 const { required } = require('joi');
 const {Mongoose} = require('../../config/database');
-const { dateToTimestamp } = require('./TokenSchemaFunctions');
+// const { dateToTimestamp } = require('./TokenSchemaFunctions');
 
 const {Schema} = Mongoose;
 
@@ -21,7 +21,7 @@ const TokenSchema = new Schema({
     last_used_at:{
         type:Date,
         default: new Date(),
-        set: dateToTimestamp
+        // set: dateToTimestamp
     },
     expires_at:{
         type:String,
@@ -31,3 +31,11 @@ const TokenSchema = new Schema({
     minimize:true,
     optimisticConcurrency:true
 });
+
+
+const Token = Mongoose.model('Tokens',TokenSchema);
+
+
+module.exports={
+    Token
+}

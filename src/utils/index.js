@@ -6,6 +6,12 @@ const {Hash} = require('./hashing_password/bcryptJS_password_hashing'); /** Func
 const {uniqueUsernameString} = require('./unique_string/unique_String');
 
 
+/***
+ * This Function generates JWT Token
+ */
+const {getJWTtoken} = require('./jwt_token/jwt_token');
+
+
 
 
 
@@ -13,5 +19,6 @@ const {uniqueUsernameString} = require('./unique_string/unique_String');
 
 module.exports={
     Hash,
-    uniqueUsernameString
+    uniqueUsernameString,
+    getJWTtoken
 }
